@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>my-news-story — 政治ニュース & AI動向</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">my-news-story</h1>
+      <p class="tagline">最新の政治ニュースとAI動向を、ひとつの画面で。</p>
+    </div>
+  </header>
+
+  <nav class="tabs container" aria-label="カテゴリ">
+    <button class="tab is-active" data-category="all">すべて</button>
+    <button class="tab" data-category="politics">政治</button>
+    <button class="tab" data-category="ai">AI動向</button>
+    <button class="refresh-btn" id="refresh" title="再読み込み">↻ 更新</button>
+  </nav>
+
+  <main class="container">
+    <p class="status" id="status" role="status">読み込み中…</p>
+    <section class="news-grid" id="news-grid"></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>出典: 各RSSフィード（Google ニュース / NHK / ITmedia ほか）。本サイトは見出しと要約のみを表示し、本文は配信元でご覧ください。</p>
+      <p class="updated" id="updated"></p>
+    </div>
+  </footer>
+
+  <script src="js/feeds.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
