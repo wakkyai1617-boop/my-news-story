@@ -1,0 +1,37 @@
+name: CI
+
+# 最小限の検証 CI。codex-ci-fix.yml がこのワークフローの失敗を検知して動くため、
+# 「CI が失敗する対象」として用意している。不要なら削除してよい。
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate JS syntax
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          files=(js/**/*.js js/*.js)
+          for f in "${files[@]}"; do
+            echo "checking $f"
+            node --check "$f"
+          done
+
+      - name: Sanity check static files
+        run: |
+          set -euo pipefail
+          test -f index.html
