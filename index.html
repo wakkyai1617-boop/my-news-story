@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>my-news-story — 政治ニュース & AI動向</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>Trusted Research Feed</title>
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container">
-      <h1 class="logo">my-news-story</h1>
-      <p class="tagline">最新の政治ニュースとAI動向を、ひとつの画面で。</p>
+      <h1 class="logo">Trusted Research Feed</h1>
+      <p class="tagline">信頼できる情報を収集・保存・整理する。</p>
     </div>
   </header>
 
@@ -18,8 +18,12 @@
     <button class="tab is-active" data-category="all">すべて</button>
     <button class="tab" data-category="politics">政治</button>
     <button class="tab" data-category="ai">AI動向</button>
+    <button class="tab" data-category="saved">保存済み</button>
+    <button class="tab" data-category="board">ボード</button>
     <button class="refresh-btn" id="refresh" title="再読み込み">↻ 更新</button>
   </nav>
+
+  <div id="saved-filter-bar" class="saved-filter-bar container" style="display:none"></div>
 
   <main class="container">
     <p class="status" id="status" role="status">読み込み中…</p>
@@ -30,10 +34,21 @@
     <div class="container">
       <p>出典: 各RSSフィード（Google ニュース / NHK / ITmedia ほか）。本サイトは見出しと要約のみを表示し、本文は配信元でご覧ください。</p>
       <p class="updated" id="updated"></p>
+      <div class="footer-reset">
+        <button id="reset-data-btn" class="btn-reset-data">保存データをリセット</button>
+      </div>
     </div>
   </footer>
 
-  <script src="js/feeds.js"></script>
-  <script src="js/app.js"></script>
+  <!-- 記事詳細モーダル -->
+  <div id="article-modal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" aria-label="閉じる">✕</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <script src="./js/feeds.js"></script>
+  <script src="./js/app.js"></script>
 </body>
 </html>
