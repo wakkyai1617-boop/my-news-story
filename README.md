@@ -4,6 +4,12 @@
 
 ---
 
+## Demo
+
+https://wakkyai1617-boop.github.io/my-news-story/
+
+---
+
 ## 概要
 
 政治・AI動向のニュースをRSSフィードから自動収集し、**ルールベースの信頼スコア**と**信頼根拠の説明**を付与して表示します。
@@ -90,6 +96,14 @@ allorigins.win → corsproxy.io → thingproxy.freeboard.io
 ---
 
 ## 起動方法
+
+### 公開版（推奨）
+
+ブラウザで以下のURLを開くだけで使えます。インストール不要です。
+
+https://wakkyai1617-boop.github.io/my-news-story/
+
+### ローカル版
 
 `fetch` を使うため `file://` ではなくHTTPサーバー経由で開いてください。
 

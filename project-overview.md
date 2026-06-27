@@ -5,7 +5,8 @@
 記事の保存・用途メモ管理・Research Board機能を備えたブラウザ完結型SPA。
 
 ## Current State（2026-06-27）
-MVP 1〜6 すべて完成。
+MVP 1〜6 すべて完成。GitHub Pages で公開済み。
+公開URL: https://wakkyai1617-boop.github.io/my-news-story/
 
 | MVP | 内容 | 状態 |
 |-----|------|------|
