@@ -324,6 +324,14 @@ function escapeHtml(s) {
 }
 const escapeAttr = escapeHtml;
 
+function sanitizeUrl(url) {
+  try {
+    const p = new URL(url);
+    if (p.protocol === "http:" || p.protocol === "https:") return url;
+  } catch {}
+  return "#";
+}
+
 /* ---------- カードHTML ---------- */
 
 function cardHtml(it) {
@@ -366,7 +374,7 @@ function cardHtml(it) {
         <span>${formatDate(it.date)}</span>
       </div>
       <div class="card-actions">
-        <a class="btn-link" href="${escapeAttr(it.link)}" target="_blank" rel="noopener noreferrer">元記事 ↗</a>
+        <a class="btn-link" href="${escapeAttr(sanitizeUrl(it.link))}" target="_blank" rel="noopener noreferrer">元記事 ↗</a>
         <button class="btn-detail" data-link="${escapeAttr(it.link)}">詳細</button>
         <button class="btn-save${saved ? " saved" : ""}" data-link="${escapeAttr(it.link)}">
           ${saved ? "保存済み ✓" : "保存"}
@@ -445,7 +453,7 @@ function renderBoardDetail(boardId) {
             </div>
             ${a.memo ? `<p class="board-article-memo">${escapeHtml(a.memo)}</p>` : ""}
             <div class="board-article-actions">
-              <a class="btn-link" href="${escapeAttr(a.link)}" target="_blank" rel="noopener noreferrer">元記事 ↗</a>
+              <a class="btn-link" href="${escapeAttr(sanitizeUrl(a.link))}" target="_blank" rel="noopener noreferrer">元記事 ↗</a>
               <button class="btn-detail" data-link="${escapeAttr(a.link)}">詳細</button>
               <button class="btn-board-remove-article" data-board-id="${escapeAttr(board.id)}" data-link="${escapeAttr(a.link)}">外す</button>
             </div>
@@ -635,7 +643,7 @@ function renderModalContent(article) {
     ${boardSectionHtml}
 
     <div class="modal-actions">
-      <a class="btn-link" href="${escapeAttr(article.link)}" target="_blank" rel="noopener noreferrer">元記事 ↗</a>
+      <a class="btn-link" href="${escapeAttr(sanitizeUrl(article.link))}" target="_blank" rel="noopener noreferrer">元記事 ↗</a>
       <button class="btn-save modal-save-btn${saved ? " saved" : ""}" data-link="${escapeAttr(article.link)}">
         ${saved ? "保存済み ✓" : "保存"}
       </button>
@@ -740,7 +748,12 @@ async function loadAll() {
     state.items = items;
 
     if (!items.length) {
-      setStatus("ニュースを取得できませんでした。時間をおいて再度お試しください。", "error");
+      setStatus("記事の取得に失敗しました。", "error");
+      el.grid.innerHTML = `
+        <div class="empty-state">
+          <p class="empty-state-message">記事の取得に失敗しました。</p>
+          <p class="empty-state-hint">時間をおいて更新するか、RSS配信元・CORSプロキシの状態を確認してください。</p>
+        </div>`;
     } else {
       el.updated.textContent =
         `最終更新: ${new Date().toLocaleString("ja-JP")}` +
